@@ -1,0 +1,30 @@
+{
+  "name": "solana-tdp-program",
+  "version": "0.1.0",
+  "description": "Solana Token Distribution Protocol – Anchor Program",
+  "license": "MIT",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": "10.33.0"
+  },
+  "scripts": {
+    "build": "anchor build",
+    "test": "anchor test",
+    "deploy": "anchor deploy",
+    "lint": "prettier --check .",
+    "format": "prettier --write ."
+  },
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.30.1"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.5",
+    "@types/chai": "^4.3.11",
+    "@types/mocha": "^10.0.6",
+    "chai": "^4.3.11",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^5.3.3",
+    "prettier": "^3.2.5"
+  }
+}
