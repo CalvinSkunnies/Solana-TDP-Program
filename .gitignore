@@ -1,0 +1,16 @@
+.anchor
+.DS_Store
+target/
+node_modules/
+dist/
+build/
+.env
+*.js.map
+
+# Solana
+test-ledger/
+*.so
+*.keypair
+
+# pnpm
+.pnpm-store/
