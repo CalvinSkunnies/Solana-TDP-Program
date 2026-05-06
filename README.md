@@ -1,7 +1,6 @@
 # Solana Token Distribution Protocol (TDP)
 
-A non-custodial, on-chain SPL-token vesting and distribution program built
-with [Anchor](https://www.anchor-lang.com/) on Solana.
+A non-custodial, on-chain SPL-token vesting and distribution program built with [Anchor](https://www.anchor-lang.com/) on Solana.
 
 ---
 
@@ -21,6 +20,28 @@ Solana-TDP-Program/
 
 ---
 
+## Quick Start (from Root)
+
+Standard commands are proxied to the Anchor app directory:
+
+```bash
+# Install dependencies
+pnpm install
+
+# Build the program
+pnpm build
+
+# Run tests
+pnpm test
+```
+
+If you prefer to work directly with the Anchor CLI:
+```bash
+cd apps/solana-tdp-anchor
+anchor build
+anchor test
+```
+
 ## Program Instructions
 
 | Instruction | Description |
@@ -33,29 +54,18 @@ Solana-TDP-Program/
 
 ```
 StreamAccount (PDA)  [seeds: b"stream" + sender + recipient]
-├── sender            Pubkey
-├── recipient         Pubkey
-├── mint              Pubkey
-├── vault             Pubkey ──► VaultTokenAccount (PDA)
-│                               [seeds: b"vault" + stream]
-├── amount            u64
-├── amount_withdrawn  u64
-├── start_time        i64
-├── end_time          i64
-├── cliff_time        i64
-├── cancelled         bool
-└── bump              u8
-```
-
-## Quick Start
-
-```bash
-git clone https://github.com/CalvinSkunnies/Solana-TDP-Program
-cd Solana-TDP-Program
-pnpm install
-cd apps/solana-tdp-anchor
-anchor build
-anchor test
+├── sender             Pubkey
+├── recipient          Pubkey
+├── mint               Pubkey
+├── vault              Pubkey ──▶ VaultTokenAccount (PDA)
+│                              [seeds: b"vault" + stream]
+├── amount             u64
+├── amount_withdrawn   u64
+├── start_time         i64
+├── end_time           i64
+├── cliff_time         i64
+├── cancelled          bool
+└── bump               u8
 ```
 
 ### Prerequisites
