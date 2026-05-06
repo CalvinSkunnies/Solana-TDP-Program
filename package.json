@@ -10,9 +10,10 @@
     "pnpm": "10.33.0"
   },
   "scripts": {
-    "build": "pnpm --filter @solana-tdp/anchor build",
-    "test": "pnpm --filter @solana-tdp/anchor test",
-    "deploy": "pnpm --filter @solana-tdp/anchor deploy",
+    "anchor": "cd apps/solana-tdp-anchor && anchor",
+    "build": "cd apps/solana-tdp-anchor && anchor build",
+    "test": "cd apps/solana-tdp-anchor && anchor test",
+    "deploy": "cd apps/solana-tdp-anchor && anchor deploy",
     "lint": "prettier --check \"**/*.{ts,js,json,toml}\"",
     "format": "prettier --write \"**/*.{ts,js,json,toml}\""
   },
