@@ -2,7 +2,7 @@
 name = "solana-tdp"
 version = "0.1.0"
 description = "Solana Token Distribution Protocol"
-edition = "2026"
+edition = "2016"
 
 [lib]
 crate-type = ["cdylib", "lib"]
