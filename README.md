@@ -128,12 +128,14 @@ anchor build
 
 ### Anchor 0.30.1 IDL Build Error
 
-If you see an error like `no method named source_file found for struct proc_macro2::Span`, ensure you have the following in your `Cargo.toml`:
-```toml
-[dependencies]
-proc-macro2 = { version = "1.0", features = ["proc-macro-span"] }
+If you see an error like `no method named source_file found for struct proc_macro2::Span`, this is a known issue with Anchor 0.30.1 on some Rust versions.
+
+**Resolution:**
+Run the following command to build without IDL generation issues:
+```bash
+RUSTFLAGS="--cfg procmacro2_semver_exempt" anchor build
 ```
-This is a known issue with Anchor 0.30.1 when building IDLs on certain Rust versions.
+Or ensure you are using a stable Rust toolchain (`rustup default stable`).
 
 ### Stack Offset Error
 
