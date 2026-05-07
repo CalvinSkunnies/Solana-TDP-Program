@@ -8,6 +8,7 @@
 //!  withdraw       – Recipient claims all tokens vested so far
 //!  cancel         – Sender cancels: vested → recipient, unvested → sender
 
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 use anchor_spl::token::{Mint, Token, TokenAccount};
 
