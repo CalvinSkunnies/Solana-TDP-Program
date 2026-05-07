@@ -19,3 +19,6 @@ wallet = "~/.config/solana/id.json"
 
 [scripts]
 test = "pnpm exec jest -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[toolchain]
+anchor_version = "0.32.1"
