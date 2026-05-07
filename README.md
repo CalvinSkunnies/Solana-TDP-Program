@@ -124,17 +124,20 @@ anchor build
    anchor deploy --provider.cluster devnet
    ```
 
-## How to Run Tests
+## Troubleshooting
 
-Run the test suite from the root:
-```bash
-pnpm test
+### Anchor 0.30.1 IDL Build Error
+
+If you see an error like `no method named source_file found for struct proc_macro2::Span`, ensure you have the following in your `Cargo.toml`:
+```toml
+[dependencies]
+proc-macro2 = { version = "1.0", features = ["proc-macro-span"] }
 ```
-Or using Anchor:
-```bash
-cd apps/solana-tdp-anchor
-anchor test
-```
+This is a known issue with Anchor 0.30.1 when building IDLs on certain Rust versions.
+
+### Stack Offset Error
+
+If you see `Stack offset of ... exceeded max offset of 4096`, you must **Box** large accounts in your instruction contexts. This project already boxes large accounts by default.
 
 ## License
 
