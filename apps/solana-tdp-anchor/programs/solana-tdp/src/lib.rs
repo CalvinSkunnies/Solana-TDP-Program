@@ -134,7 +134,7 @@ pub struct CreateStream<'info> {
     #[account(
         init,
         payer = sender,
-        space = StreamAccount::LEN,
+        space = 8 + 150,
         seeds = [b"stream", sender.key().as_ref(), recipient.key().as_ref()],
         bump,
     )]
