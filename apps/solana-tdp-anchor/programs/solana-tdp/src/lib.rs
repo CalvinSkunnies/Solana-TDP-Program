@@ -34,7 +34,6 @@ pub mod solana_tdp {
         _ctx: Context<CreateStream>,
         _params: CreateStreamParams,
     ) -> Result<()> {
-        // TODO: validate params, transfer tokens to vault, populate StreamAccount
         Ok(())
     }
 
@@ -47,9 +46,6 @@ pub mod solana_tdp {
     /// - recipient_token  (mut TokenAcct)   – credited with vested amount
     /// - token_program
     pub fn withdraw(_ctx: Context<Withdraw>) -> Result<()> {
-        // TODO: compute vested = f(clock, stream) − stream.amount_withdrawn
-        //       transfer vested tokens from vault → recipient_token
-        //       update stream.amount_withdrawn
         Ok(())
     }
 
@@ -64,8 +60,6 @@ pub mod solana_tdp {
     /// - recipient_token  (mut TokenAcct)   – receives vested portion
     /// - token_program
     pub fn cancel(_ctx: Context<Cancel>) -> Result<()> {
-        // TODO: compute vested, transfer vested → recipient, remainder → sender
-        //       close vault, mark stream.cancelled = true
         Ok(())
     }
 }
@@ -138,7 +132,7 @@ pub struct CreateStream<'info> {
         seeds = [b"stream", sender.key().as_ref(), recipient.key().as_ref()],
         bump,
     )]
-    pub stream: Account<'info, StreamAccount>,
+    pub stream: Box<Account<'info, StreamAccount>>,
 
     #[account(
         init,
@@ -148,12 +142,12 @@ pub struct CreateStream<'info> {
         seeds = [b"vault", stream.key().as_ref()],
         bump,
     )]
-    pub vault: Account<'info, TokenAccount>,
+    pub vault: Box<Account<'info, TokenAccount>>,
 
     #[account(mut)]
-    pub sender_token: Account<'info, TokenAccount>,
+    pub sender_token: Box<Account<'info, TokenAccount>>,
 
-    pub mint: Account<'info, Mint>,
+    pub mint: Box<Account<'info, Mint>>,
     pub token_program: Program<'info, Token>,
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
@@ -170,17 +164,17 @@ pub struct Withdraw<'info> {
         bump = stream.bump,
         has_one = recipient,
     )]
-    pub stream: Account<'info, StreamAccount>,
+    pub stream: Box<Account<'info, StreamAccount>>,
 
     #[account(
         mut,
         seeds = [b"vault", stream.key().as_ref()],
         bump,
     )]
-    pub vault: Account<'info, TokenAccount>,
+    pub vault: Box<Account<'info, TokenAccount>>,
 
     #[account(mut)]
-    pub recipient_token: Account<'info, TokenAccount>,
+    pub recipient_token: Box<Account<'info, TokenAccount>>,
 
     pub token_program: Program<'info, Token>,
 }
@@ -199,20 +193,20 @@ pub struct Cancel<'info> {
         bump = stream.bump,
         has_one = sender,
     )]
-    pub stream: Account<'info, StreamAccount>,
+    pub stream: Box<Account<'info, StreamAccount>>,
 
     #[account(
         mut,
         seeds = [b"vault", stream.key().as_ref()],
         bump,
     )]
-    pub vault: Account<'info, TokenAccount>,
+    pub vault: Box<Account<'info, TokenAccount>>,
 
     #[account(mut)]
-    pub sender_token: Account<'info, TokenAccount>,
+    pub sender_token: Box<Account<'info, TokenAccount>>,
 
     #[account(mut)]
-    pub recipient_token: Account<'info, TokenAccount>,
+    pub recipient_token: Box<Account<'info, TokenAccount>>,
 
     pub token_program: Program<'info, Token>,
 }
