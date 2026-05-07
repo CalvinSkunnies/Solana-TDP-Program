@@ -68,7 +68,7 @@ StreamAccount (PDA)  [seeds: b"stream" + sender + recipient]
 └── bump               u8
 ```
 
-### Prerequisites
+## Prerequisites
 
 | Tool | Version |
 |---|---|
@@ -77,6 +77,64 @@ StreamAccount (PDA)  [seeds: b"stream" + sender + recipient]
 | Anchor CLI | 0.30.1 |
 | Node.js | ≥ 20 |
 | pnpm | **10.33.0** |
+
+## Setup Steps
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/CalvinSkunnies/Solana-TDP-Program.git
+   cd Solana-TDP-Program
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   pnpm install
+   ```
+
+## How to Build
+
+Build the Anchor program from the root:
+```bash
+pnpm build
+```
+Or from the anchor app directory:
+```bash
+cd apps/solana-tdp-anchor
+anchor build
+```
+
+## How to Deploy to Devnet
+
+1. **Configure Solana CLI for devnet:**
+   ```bash
+   solana config set --url devnet
+   ```
+
+2. **Ensure you have a wallet with devnet SOL:**
+   ```bash
+   solana airdrop 2
+   ```
+
+3. **Update Program ID (if needed):**
+   Update `declare_id!` in `apps/solana-tdp-anchor/programs/solana-tdp/src/lib.rs` and `Anchor.toml` with your program's public key.
+
+4. **Deploy:**
+   ```bash
+   cd apps/solana-tdp-anchor
+   anchor deploy --provider.cluster devnet
+   ```
+
+## How to Run Tests
+
+Run the test suite from the root:
+```bash
+pnpm test
+```
+Or using Anchor:
+```bash
+cd apps/solana-tdp-anchor
+anchor test
+```
 
 ## License
 
